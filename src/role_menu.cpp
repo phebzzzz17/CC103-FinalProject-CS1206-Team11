@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 // from queue.cpp
@@ -105,11 +106,11 @@ void adminMenu() {
                 break;
 
             case 5:
-                cout << "\n🔍 Search/Sort coming soon...\n"; // Placeholder for future implementation
+                cout << "\n🔍 Search/Sort coming soon...\n";
                 break;
 
             case 6:
-                cout << "\n⚙ Cancellation system coming soon...\n"; // Placeholder for future implementation
+                cout << "\n⚙ Cancellation system coming soon...\n";
                 break;
         }
 
