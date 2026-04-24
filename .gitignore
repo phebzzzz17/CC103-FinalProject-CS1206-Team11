@@ -1,0 +1,15 @@
+# ignore excecutable files
+*.exe
+private_data/
+# ignore environment variables
+.env
+# ignore coverage reports
+coverage/
+# ignore temporary files
+*.tmp
+# ignore IDE specific files
+.vscode/
+
+
+
+
