@@ -1,0 +1,3 @@
+# ignore excecutable files
+*.exe
+private_data/
