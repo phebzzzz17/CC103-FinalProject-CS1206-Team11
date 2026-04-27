@@ -4,6 +4,7 @@ using namespace std;
 
 #define MAX 5
 
+// ===================== DATA STRUCT =====================
 struct Passenger {
     int ticketNo;
     string name;
@@ -12,24 +13,11 @@ struct Passenger {
 
 struct Queue {
     Passenger data[MAX];
-    int front, rear;
+    int front;
+    int rear;
 };
 
 int nextTicket = 1001;
-
-// ===================== INIT =====================
-void initQueue(Queue &q) {
-    q.front = -1;
-    q.rear = -1;
-}
-
-bool isEmpty(Queue q) {
-    return (q.front == -1 || q.front > q.rear);
-}
-
-bool isFull(Queue q) {
-    return (q.rear == MAX - 1);
-}
 
 // ===================== TRIPS =====================
 string trips[3] = {
@@ -37,6 +25,21 @@ string trips[3] = {
     "Batangas → Mindoro | 12:00 PM",
     "Batangas → Mindoro | 04:00 PM"
 };
+
+// ===================== INIT =====================
+void initQueue(Queue &q) {
+    q.front = -1;
+    q.rear = -1;
+}
+
+// ===================== STATUS CHECKS =====================
+bool isEmpty(Queue q) {
+    return (q.front == -1 || q.front > q.rear);
+}
+
+bool isFull(Queue q) {
+    return (q.rear == MAX - 1);
+}
 
 // ===================== BOOK TICKET =====================
 void enqueue(Queue &q, string name, int choice) {
@@ -46,18 +49,19 @@ void enqueue(Queue &q, string name, int choice) {
         return;
     }
 
-    Passenger p;
-    p.ticketNo = nextTicket++;
-    p.name = name;
-
     if (choice < 1 || choice > 3) {
         cout << "\n❌ Invalid trip selection.\n";
         return;
     }
 
+    Passenger p;
+    p.ticketNo = nextTicket++;
+    p.name = name;
     p.trip = trips[choice - 1];
 
-    if (q.front == -1) q.front = 0;
+    if (q.front == -1) {
+        q.front = 0;
+    }
 
     q.data[++q.rear] = p;
 
@@ -65,7 +69,7 @@ void enqueue(Queue &q, string name, int choice) {
     cout << "🎫 Ticket #: " << p.ticketNo << endl;
 }
 
-// ===================== SERVE (ADMIN USE ONLY) =====================
+// ===================== SERVE PASSENGER =====================
 void dequeue(Queue &q) {
 
     if (isEmpty(q)) {
@@ -79,9 +83,14 @@ void dequeue(Queue &q) {
     cout << "🛳 Trip    : " << q.data[q.front].trip << endl;
 
     q.front++;
+
+    // reset queue when empty
+    if (q.front > q.rear) {
+        q.front = q.rear = -1;
+    }
 }
 
-// ===================== DISPLAY =====================
+// ===================== DISPLAY QUEUE =====================
 void displayQueue(Queue q) {
 
     if (isEmpty(q)) {
