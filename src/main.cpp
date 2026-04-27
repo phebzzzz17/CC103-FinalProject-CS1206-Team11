@@ -3,29 +3,48 @@
 #include <chrono>
 using namespace std;
 
+void roleMenu();
 
+// ANSI color codes
+#define BLUE "\033[34m"
+#define RESET "\033[0m"
+
+// ===================== LOADING BAR =====================
+void loadingBar() {
+    cout << "\nLoading system:\n\n[";
+
+    for (int i = 0; i < 20; i++) {
+        cout << BLUE << "█" << RESET;
+        cout.flush();
+        this_thread::sleep_for(chrono::milliseconds(100));
+    }
+
+    cout << "] 100%\n";
+}
+
+// ===================== MAIN =====================
 int main() {
 
-    void roleMenu();
+    cout << "\n========================================\n";
+    cout << "        🚢 SAILCHECK SYSTEM 🌊\n";
+    cout << "        Port Booking Platform\n";
+    cout << "========================================\n";
 
-    // ===================== WELCOME DESIGN =====================
-    cout << "\n=================================\n";
-    cout << "   🚢 WELCOME TO SAILCHECK🌊\n";
-    cout << "   Port Booking System\n";
-    cout << "=================================\n";
-
-    cout << "Loading system...\n";
-
-    // loading animation
+    // Boat animation
+    cout << "\nInitializing system... ";
     for (int i = 0; i < 3; i++) {
         cout << "🛥️ ";
         cout.flush();
-        this_thread::sleep_for(chrono::seconds(1));
+        this_thread::sleep_for(chrono::milliseconds(400));
     }
+    cout << "\n";
 
-    cout << "\nSystem ready! Please log in to continue.\n";
+    // Blue loading bar
+    loadingBar();
 
-    // go to role menu
+    cout << "\n✅ System ready!\n";
+    cout << "👉 Please log in to continue.\n";
+
     roleMenu();
 
     return 0;
