@@ -15,6 +15,7 @@ struct Queue {
     Passenger data[MAX];
     int front;
     int rear;
+    int front, rear;
 };
 
 int nextTicket = 1001;
@@ -41,6 +42,13 @@ bool isFull(Queue q) {
     return (q.rear == MAX - 1);
 }
 
+// ===================== TRIPS =====================
+string trips[3] = {
+    "Batangas → Mindoro | 08:00 AM",
+    "Batangas → Mindoro | 12:00 PM",
+    "Batangas → Mindoro | 04:00 PM"
+};
+
 // ===================== BOOK TICKET =====================
 void enqueue(Queue &q, string name, int choice) {
 
@@ -48,6 +56,10 @@ void enqueue(Queue &q, string name, int choice) {
         cout << "\n❌ Booking failed: No available slots.\n";
         return;
     }
+
+    Passenger p;
+    p.ticketNo = nextTicket++;
+    p.name = name;
 
     if (choice < 1 || choice > 3) {
         cout << "\n❌ Invalid trip selection.\n";
@@ -62,6 +74,9 @@ void enqueue(Queue &q, string name, int choice) {
     if (q.front == -1) {
         q.front = 0;
     }
+    p.trip = trips[choice - 1];
+
+    if (q.front == -1) q.front = 0;
 
     q.data[++q.rear] = p;
 
@@ -70,6 +85,7 @@ void enqueue(Queue &q, string name, int choice) {
 }
 
 // ===================== SERVE PASSENGER =====================
+// ===================== SERVE (ADMIN USE ONLY) =====================
 void dequeue(Queue &q) {
 
     if (isEmpty(q)) {
@@ -91,6 +107,9 @@ void dequeue(Queue &q) {
 }
 
 // ===================== DISPLAY QUEUE =====================
+}
+
+// ===================== DISPLAY =====================
 void displayQueue(Queue q) {
 
     if (isEmpty(q)) {
@@ -105,4 +124,5 @@ void displayQueue(Queue q) {
              << " | " << q.data[i].name
              << " | " << q.data[i].trip << endl;
     }
+}
 }

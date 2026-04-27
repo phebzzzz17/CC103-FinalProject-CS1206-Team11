@@ -3,6 +3,7 @@
 using namespace std;
 
 // ===== Function Declarations =====
+// from queue.cpp
 void enqueue();
 void dequeue();
 void displayQueue();
@@ -47,6 +48,25 @@ bool adminLogin() {
         } else {
             cout << "❌ Wrong password. Attempts left: " << attempts << "\n";
         }
+// ===================== ADMIN LOGIN =====================
+bool adminLogin() {
+
+    string password;
+    const string correctPassword = "admin123";
+
+    cout << "\n=================================\n";
+    cout << "       🔐 ADMIN LOGIN\n";
+    cout << "=================================\n";
+
+    cout << "Enter password: ";
+    cin >> password;
+
+    if (password == correctPassword) {
+        cout << "\n✅ Login successful. Welcome Admin!\n";
+        return true;
+    } else {
+        cout << "\n❌ Wrong password. Access denied.\n";
+        return false;
     }
 
     cout << "\n🚫 Access denied.\n";
@@ -60,6 +80,13 @@ void customerMenu() {
     do {
         printHeader("👤 CUSTOMER MENU 🌊");
 
+
+    int choice;
+
+    do {
+        cout << "\n=================================\n";
+        cout << "   👤 CUSTOMER MENU 🌊\n";
+        cout << "=================================\n";
         cout << "1. 📝 Book Ticket\n";
         cout << "2. 🔍 Search Available Trips\n";
         cout << "3. ❌ Cancel Ticket\n";
@@ -77,6 +104,10 @@ void customerMenu() {
         }
 
         switch (choice) {
+        cin >> choice;
+
+        switch (choice) {
+
             case 1:
                 enqueue();
                 break;
@@ -90,6 +121,13 @@ void customerMenu() {
                 break;
 
             case 4: // fallthrough
+                cout << "\n🛳 Available Trips:\n";
+                cout << "1. Batangas → Mindoro | 08:00 AM\n";
+                cout << "2. Batangas → Mindoro | 12:00 PM\n";
+                cout << "3. Batangas → Mindoro | 04:00 PM\n";
+                break;
+
+            case 4:
             case 5:
                 displayQueue();
                 break;
@@ -99,6 +137,9 @@ void customerMenu() {
 
             default:
                 cout << "\n⚠ Invalid choice.\n";
+            case 3:
+                cout << "\n❌ Cancellation feature coming soon...\n";
+                break;
         }
 
     } while (choice != 0);
@@ -111,6 +152,13 @@ void adminMenu() {
     do {
         printHeader("🛠 ADMIN MENU 🌊");
 
+
+    int choice;
+
+    do {
+        cout << "\n=================================\n";
+        cout << "   🛠 ADMIN MENU 🌊\n";
+        cout << "=================================\n";
         cout << "1. 🗂 Manage Trips\n";
         cout << "2. 📋 View All Bookings\n";
         cout << "3. 📡 Monitor Queue\n";
@@ -129,6 +177,10 @@ void adminMenu() {
         }
 
         switch (choice) {
+        cin >> choice;
+
+        switch (choice) {
+
             case 2:
             case 3:
                 displayQueue();
@@ -163,6 +215,13 @@ void roleMenu() {
     do {
         printHeader("🚢 SAILCHECK SYSTEM 🌊");
 
+
+    int role;
+
+    do {
+        cout << "\n=================================\n";
+        cout << "   🚢 SAILCHECK SYSTEM 🌊\n";
+        cout << "=================================\n";
         cout << "1. 👤 Customer\n";
         cout << "2. 🛠 Admin\n";
         cout << "0. ❌ Exit\n";
@@ -177,6 +236,10 @@ void roleMenu() {
         }
 
         switch (role) {
+        cin >> role;
+
+        switch (role) {
+
             case 1:
                 customerMenu();
                 break;
@@ -202,4 +265,5 @@ void roleMenu() {
 int main() {
     roleMenu();
     return 0;
+}
 }
