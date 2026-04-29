@@ -4,7 +4,6 @@ using namespace std;
 
 #define MAX 20
 
-// ===================== DATA STRUCT =====================
 struct Passenger {
     int ticketNo;
     string name;
@@ -13,8 +12,7 @@ struct Passenger {
 
 struct Queue {
     Passenger data[MAX];
-    int front;
-    int rear;
+    int front, rear;
 };
 
 int nextTicket = 1001;
@@ -25,7 +23,6 @@ void initQueue(Queue &q) {
     q.rear = -1;
 }
 
-// ===================== STATUS CHECKS =====================
 bool isEmpty(Queue q) {
     return (q.front == -1 || q.front > q.rear);
 }
@@ -58,9 +55,6 @@ void enqueue(Queue &q, string name, int choice) {
         return;
     }
 
-     if (q.front == -1) {
-        q.front = 0;
-    }
     p.trip = trips[choice - 1];
     
     q.data[++q.rear] = p;
@@ -69,7 +63,7 @@ void enqueue(Queue &q, string name, int choice) {
     cout << "🎫 Ticket #: " << p.ticketNo << endl;
 }
 
-// ===================== SERVE PASSENGER =====================
+// ===================== SERVE (ADMIN USE ONLY) =====================
 void dequeue(Queue &q) {
 
     if (isEmpty(q)) {
@@ -83,15 +77,10 @@ void dequeue(Queue &q) {
     cout << "🛳 Trip    : " << q.data[q.front].trip << endl;
 
     q.front++;
-
-    // reset queue when empty
-    if (q.front > q.rear) {
-        q.front = q.rear = -1;
-    }
 }
 
-// ===================== DISPLAY QUEUE =====================
-void displayQueue(Queue q, string tripName) {
+// ===================== DISPLAY =====================
+void displayQueue(Queue q) {
 
     if (isEmpty(q)) {
         cout << "\n📭 No bookings available.\n";
@@ -105,64 +94,4 @@ void displayQueue(Queue q, string tripName) {
              << " | " << q.data[i].name << endl;
            //  << " | " << q.data[i].trip << endl;
     }
-}
-
-// ===================== MAIN =====================
-int main() {
-
-    Queue q1, q2, q3;
-    initQueue(q1);
-    initQueue(q2);
-    initQueue(q3);
-
-    int choice;
-    string name;
-    int tripChoice;
-
-    do {
-        cout << "\n=============================\n";
-        cout << "   🚢 MULTI-QUEUE SYSTEM\n";
-        cout << "=============================\n";
-        cout << "1. Book Ticket\n";
-        cout << "2. View All Trips\n";
-        cout << "0. Exit\n👉 ";
-        cin >> choice;
-
-        switch (choice) {
-
-            case 1:
-                cin.ignore();
-                cout << "Enter Name: ";
-                getline(cin, name);
-
-                cout << "\nSelect Trip:\n";
-                for (int i = 0; i < 3; i++) {
-                    cout << i + 1 << ". " << trips[i] << endl;
-                }
-
-                cout << "Choice: ";
-                cin >> tripChoice;
-
-                if (tripChoice == 1)
-                    enqueue(q1, name);
-                else if (tripChoice == 2)
-                    enqueue(q2, name);
-                else if (tripChoice == 3)
-                    enqueue(q3, name);
-                else
-                    cout << "❌ Invalid choice\n";
-
-                break;
-
-            case 2:
-                displayQueue(q1, trips[0]);
-                displayQueue(q2, trips[1]);
-                displayQueue(q3, trips[2]);
-                break;
-        }
-
-    } while (choice != 0);
-
-    cout << "\n👋 Thank you!\n";
-    return 0;
 }
