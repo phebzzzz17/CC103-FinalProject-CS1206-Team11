@@ -1,5 +1,3 @@
-#ifndef STACK_BOX_H
-#define STACK_BOX_H
 
 #include <iostream>
 using namespace std;
@@ -83,4 +81,3 @@ public:
         cout << "==============================\n";
     }
 };
-#endif
