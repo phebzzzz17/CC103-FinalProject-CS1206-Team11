@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-#define MAX 5
+#define MAX 20
 
 struct Passenger {
     int ticketNo;
@@ -56,9 +56,7 @@ void enqueue(Queue &q, string name, int choice) {
     }
 
     p.trip = trips[choice - 1];
-
-    if (q.front == -1) q.front = 0;
-
+    
     q.data[++q.rear] = p;
 
     cout << "\n✅ Booking Confirmed!\n";
@@ -89,11 +87,11 @@ void displayQueue(Queue q) {
         return;
     }
 
-    cout << "\n📋 Current Bookings:\n";
+    cout << "\n📋 " << tripName << " Bookings:\n";
 
     for (int i = q.front; i <= q.rear; i++) {
         cout << "🎫 " << q.data[i].ticketNo
-             << " | " << q.data[i].name
-             << " | " << q.data[i].trip << endl;
+             << " | " << q.data[i].name << endl;
+           //  << " | " << q.data[i].trip << endl;
     }
 }
