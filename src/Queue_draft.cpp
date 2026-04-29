@@ -4,7 +4,6 @@ using namespace std;
 
 #define MAX 5
 
-// ===================== DATA STRUCT =====================
 struct Passenger {
     int ticketNo;
     string name;
@@ -13,19 +12,10 @@ struct Passenger {
 
 struct Queue {
     Passenger data[MAX];
-    int front;
-    int rear;
     int front, rear;
 };
 
 int nextTicket = 1001;
-
-// ===================== TRIPS =====================
-string trips[3] = {
-    "Batangas → Mindoro | 08:00 AM",
-    "Batangas → Mindoro | 12:00 PM",
-    "Batangas → Mindoro | 04:00 PM"
-};
 
 // ===================== INIT =====================
 void initQueue(Queue &q) {
@@ -33,7 +23,6 @@ void initQueue(Queue &q) {
     q.rear = -1;
 }
 
-// ===================== STATUS CHECKS =====================
 bool isEmpty(Queue q) {
     return (q.front == -1 || q.front > q.rear);
 }
@@ -66,14 +55,6 @@ void enqueue(Queue &q, string name, int choice) {
         return;
     }
 
-    Passenger p;
-    p.ticketNo = nextTicket++;
-    p.name = name;
-    p.trip = trips[choice - 1];
-
-    if (q.front == -1) {
-        q.front = 0;
-    }
     p.trip = trips[choice - 1];
 
     if (q.front == -1) q.front = 0;
@@ -84,7 +65,6 @@ void enqueue(Queue &q, string name, int choice) {
     cout << "🎫 Ticket #: " << p.ticketNo << endl;
 }
 
-// ===================== SERVE PASSENGER =====================
 // ===================== SERVE (ADMIN USE ONLY) =====================
 void dequeue(Queue &q) {
 
@@ -99,14 +79,6 @@ void dequeue(Queue &q) {
     cout << "🛳 Trip    : " << q.data[q.front].trip << endl;
 
     q.front++;
-
-    // reset queue when empty
-    if (q.front > q.rear) {
-        q.front = q.rear = -1;
-    }
-}
-
-// ===================== DISPLAY QUEUE =====================
 }
 
 // ===================== DISPLAY =====================
@@ -124,5 +96,4 @@ void displayQueue(Queue q) {
              << " | " << q.data[i].name
              << " | " << q.data[i].trip << endl;
     }
-}
 }

@@ -2,52 +2,11 @@
 #include <string>
 using namespace std;
 
-// ===== Function Declarations =====
 // from queue.cpp
 void enqueue();
 void dequeue();
 void displayQueue();
 
-void printHeader(const string& title);
-void showTrips();
-
-bool adminLogin();
-void customerMenu();
-void adminMenu();
-void roleMenu();
-
-// ===================== UI HELPERS =====================
-void printHeader(const string& title) {
-    cout << "\n=================================\n";
-    cout << "   " << title << "\n";
-    cout << "=================================\n";
-}
-
-void showTrips() {
-    cout << "\n🛳 Available Trips:\n";
-    cout << "1. Batangas → Mindoro | 08:00 AM\n";
-    cout << "2. Batangas → Mindoro | 12:00 PM\n";
-    cout << "3. Batangas → Mindoro | 04:00 PM\n";
-}
-
-// ===================== ADMIN LOGIN =====================
-bool adminLogin() {
-    string password;
-    const string correctPassword = "admin123";
-    int attempts = 3;
-
-    printHeader("🔐 ADMIN LOGIN");
-
-    while (attempts--) {
-        cout << "Enter password: ";
-        cin >> password;
-
-        if (password == correctPassword) {
-            cout << "\n✅ Login successful. Welcome Admin!\n";
-            return true;
-        } else {
-            cout << "❌ Wrong password. Attempts left: " << attempts << "\n";
-        }
 // ===================== ADMIN LOGIN =====================
 bool adminLogin() {
 
@@ -68,18 +27,10 @@ bool adminLogin() {
         cout << "\n❌ Wrong password. Access denied.\n";
         return false;
     }
-
-    cout << "\n🚫 Access denied.\n";
-    return false;
 }
 
 // ===================== CUSTOMER MENU =====================
 void customerMenu() {
-    int choice;
-
-    do {
-        printHeader("👤 CUSTOMER MENU 🌊");
-
 
     int choice;
 
@@ -95,15 +46,6 @@ void customerMenu() {
         cout << "0. 🔙 Back\n";
         cout << "---------------------------------\n";
         cout << "👉 Select: ";
-
-        if (!(cin >> choice)) {
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "⚠ Invalid input. Try again.\n";
-            continue;
-        }
-
-        switch (choice) {
         cin >> choice;
 
         switch (choice) {
@@ -113,14 +55,6 @@ void customerMenu() {
                 break;
 
             case 2:
-                showTrips();
-                break;
-
-            case 3:
-                cout << "\n❌ Cancellation feature coming soon...\n";
-                break;
-
-            case 4: // fallthrough
                 cout << "\n🛳 Available Trips:\n";
                 cout << "1. Batangas → Mindoro | 08:00 AM\n";
                 cout << "2. Batangas → Mindoro | 12:00 PM\n";
@@ -132,11 +66,6 @@ void customerMenu() {
                 displayQueue();
                 break;
 
-            case 0:
-                break;
-
-            default:
-                cout << "\n⚠ Invalid choice.\n";
             case 3:
                 cout << "\n❌ Cancellation feature coming soon...\n";
                 break;
@@ -147,11 +76,6 @@ void customerMenu() {
 
 // ===================== ADMIN MENU =====================
 void adminMenu() {
-    int choice;
-
-    do {
-        printHeader("🛠 ADMIN MENU 🌊");
-
 
     int choice;
 
@@ -168,15 +92,6 @@ void adminMenu() {
         cout << "0. 🔙 Back\n";
         cout << "---------------------------------\n";
         cout << "👉 Select: ";
-
-        if (!(cin >> choice)) {
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "⚠ Invalid input. Try again.\n";
-            continue;
-        }
-
-        switch (choice) {
         cin >> choice;
 
         switch (choice) {
@@ -197,12 +112,6 @@ void adminMenu() {
             case 6:
                 cout << "\n⚙ Cancellation system coming soon...\n";
                 break;
-
-            case 0:
-                break;
-
-            default:
-                cout << "\n⚠ Invalid choice.\n";
         }
 
     } while (choice != 0);
@@ -210,11 +119,6 @@ void adminMenu() {
 
 // ===================== ROLE MENU =====================
 void roleMenu() {
-    int role;
-
-    do {
-        printHeader("🚢 SAILCHECK SYSTEM 🌊");
-
 
     int role;
 
@@ -227,15 +131,6 @@ void roleMenu() {
         cout << "0. ❌ Exit\n";
         cout << "---------------------------------\n";
         cout << "👉 Select Role: ";
-
-        if (!(cin >> role)) {
-            cin.clear();
-            cin.ignore(1000, '\n');
-            cout << "⚠ Invalid input. Try again.\n";
-            continue;
-        }
-
-        switch (role) {
         cin >> role;
 
         switch (role) {
@@ -259,11 +154,4 @@ void roleMenu() {
         }
 
     } while (role != 0);
-}
-
-// ===================== MAIN =====================
-int main() {
-    roleMenu();
-    return 0;
-}
 }
