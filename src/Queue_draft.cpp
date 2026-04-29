@@ -2,7 +2,7 @@
 #include <string>
 using namespace std;
 
-#define MAX 5
+#define MAX 20
 
 // ===================== DATA STRUCT =====================
 struct Passenger {
@@ -15,17 +15,9 @@ struct Queue {
     Passenger data[MAX];
     int front;
     int rear;
-    int front, rear;
 };
 
 int nextTicket = 1001;
-
-// ===================== TRIPS =====================
-string trips[3] = {
-    "Batangas → Mindoro | 08:00 AM",
-    "Batangas → Mindoro | 12:00 PM",
-    "Batangas → Mindoro | 04:00 PM"
-};
 
 // ===================== INIT =====================
 void initQueue(Queue &q) {
@@ -66,18 +58,11 @@ void enqueue(Queue &q, string name, int choice) {
         return;
     }
 
-    Passenger p;
-    p.ticketNo = nextTicket++;
-    p.name = name;
-    p.trip = trips[choice - 1];
-
-    if (q.front == -1) {
+     if (q.front == -1) {
         q.front = 0;
     }
     p.trip = trips[choice - 1];
-
-    if (q.front == -1) q.front = 0;
-
+    
     q.data[++q.rear] = p;
 
     cout << "\n✅ Booking Confirmed!\n";
@@ -85,7 +70,6 @@ void enqueue(Queue &q, string name, int choice) {
 }
 
 // ===================== SERVE PASSENGER =====================
-// ===================== SERVE (ADMIN USE ONLY) =====================
 void dequeue(Queue &q) {
 
     if (isEmpty(q)) {
@@ -107,9 +91,6 @@ void dequeue(Queue &q) {
 }
 
 // ===================== DISPLAY QUEUE =====================
-}
-
-// ===================== DISPLAY =====================
 void displayQueue(Queue q) {
 
     if (isEmpty(q)) {
@@ -125,4 +106,4 @@ void displayQueue(Queue q) {
              << " | " << q.data[i].trip << endl;
     }
 }
-}
+
