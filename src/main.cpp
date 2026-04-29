@@ -18,7 +18,7 @@ void loadingBar() {
     for (int i = 0; i < 20; i++) {
         cout << BLUE << "█" << RESET;
         cout.flush();
-        this_thread::sleep_for(chrono::seconds(1));
+        this_thread::sleep_for(chrono::milliseconds(100)); // faster (100ms)
     }
 
     cout << "] 100%\n";
@@ -42,7 +42,7 @@ int main() {
     for (int i = 0; i < 3; i++) {
         cout << "🛥️ ";
         cout.flush();
-        this_thread::sleep_for(chrono::seconds(1));
+        this_thread::sleep_for(chrono::milliseconds(300)); // faster here too
     }
 
     cout << "\n";
