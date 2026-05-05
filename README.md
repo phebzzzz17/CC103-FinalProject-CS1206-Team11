@@ -75,7 +75,7 @@ g++ main.cpp -o sailcheck
 
 ## 🔐 Admin Access
 
-* **Password:** `admin123`
+* **Password:** `********`
 
 ---
 
