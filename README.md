@@ -108,8 +108,8 @@ System ready!
 ## 👨‍💻 Developers
 
 * Charmaine Argona
-* [Add Member 2]
-* [Add Member 3]
+* Phoebe Leonides M. Dolor
+* Danielle Panopio
 
 ---
 
