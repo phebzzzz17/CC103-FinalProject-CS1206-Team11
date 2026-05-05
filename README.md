@@ -6,133 +6,113 @@
 
 ---
 
-## 📌 Project Overview
+👨‍💻 Team Members
+Name	Role
+Member 1	Booking System & Queue Handling
+Member 2	Seat Management & Trip Organization
+Member 3	Priority Logic & Sorting System
+📌 Problem Overview
 
-**SAILCHECK** is a console-based port booking system developed in C++.
-It allows passengers to book ferry tickets, manage reservations, and prioritize VIP passengers using efficient data structures.
+In real-world ferry terminals, passengers often experience disorganized queues, long waiting times, and lack of proper prioritization. Although trips are scheduled, most systems still follow a basic first-come, first-served approach.
 
-The system simulates a real-world port booking process with queue handling, transaction tracking, and admin controls.
+This becomes inefficient when handling urgent passengers such as seniors, PWDs, pregnant individuals, and VIPs.
 
----
+SAILCHECK addresses this by introducing a structured system that combines trip-based grouping and priority-based processing using appropriate data structures.
 
-## 🎯 Objectives
+🧠 Data Structures Used
+🔹 Queue
 
-* To simulate a real-life ticket booking system
-* To apply fundamental data structures in a practical scenario
-* To create an organized and user-friendly console application
+FIFO structure used for regular passengers
+→ Ensures fairness based on arrival time
 
----
+🔹 Priority Queue
 
-## ⚙️ Key Features
+Heap-based structure for urgent passengers
+→ Ensures VIP, senior, PWD, and pregnant passengers are served first
 
-* 🎫 Ticket Booking System
-* 🛳 Trip Selection (Batangas → Mindoro schedules)
-* ⭐ Priority Passenger Handling (VIP)
-* 📋 View and Manage Bookings
-* ❌ Cancel Reservations
-* 🔍 Search Passenger by ID
-* 🔃 Sort Bookings by Name
-* 📜 Transaction History Tracking
-* 🔐 Admin Login System
+🔹 Stack
 
----
+LIFO structure used for transaction history
+→ Stores recent bookings and cancellations for tracking system activity
 
-## 🧠 Data Structures Used
+🔹 Map
 
-| Data Structure | Purpose                           |
-| -------------- | --------------------------------- |
-| Queue          | Handles regular passengers (FIFO) |
-| Priority Queue | Handles VIP passengers            |
-| Stack          | Stores transaction history        |
-| Vector         | Stores all passenger records      |
+Key-value structure (trip → passengers)
+→ Organizes passengers per trip schedule for better system structure
 
----
+🔹 Vector
 
-## 🖥️ System Flow
+Dynamic container for passenger storage
+→ Used for searching, sorting, and iteration
 
-1. User selects role (Customer/Admin)
-2. Customer can book, view, or cancel tickets
-3. Admin can manage passengers and system data
-4. System prioritizes VIP passengers during serving
+🏗️ System Design
 
----
+The system is built in a modular structure with functions handling booking, cancellation, serving, seat allocation, and trip management.
 
-## 💻 How to Run the Program
+It simulates a real-world ferry system by combining scheduling, prioritization, and structured seat assignment.
 
-### 1. Compile the code
+🔒 Core Components
+regularQueue → Regular passengers
+priorityQueue → Priority passengers
+transactionStack → Booking history
+allBookings → Master passenger list
+tripBookings → Groups passengers per trip
+tripSeats → Tracks available seats per trip
+tripNormalOrder / tripPriorityOrder → Seat allocation system
+🔄 System Process Flow
+1. Booking Process
+Passenger enters details (name, age, trip)
+System assigns ticket ID
+Passenger is categorized based on age or type
+Seat is assigned dynamically
+Stored in trip-based and global structures
+Added to appropriate queue system
+2. Trip Organization
 
-```bash
-g++ main.cpp -o sailcheck
-```
+Passengers are grouped using:
 
-### 2. Run the program
+map<string, vector<Passenger>>
 
-```bash
-./sailcheck
-```
+Each trip acts as a separate container:
 
----
+Trip 1 → 08:00 AM
+Trip 2 → 12:00 PM
+Trip 3 → 04:00 PM
 
-## 🔐 Admin Access
+This improves clarity and structured management.
 
-* **Password:** `********`
+3. Priority Sorting
 
----
+Inside each trip, passengers are sorted using:
 
-## 📸 Sample Output
+return a.isPriority > b.isPriority;
+💡 Meaning:
+Priority passengers are displayed first
+Regular passengers follow after
 
-```
-WELCOME TO SAILCHECK
-Port Booking System
+This is a custom comparator-based sorting method
 
-Loading system...
-████████████████████ 100%
-
-System ready!
-```
-
----
-
-## 🚀 Technologies Used
-
-* C++
-* Standard Template Library (STL)
-
-  * queue
-  * stack
-  * priority_queue
-  * vector
-
----
-
-## 👨‍💻 Developers
-
-* Charmaine Argona
-* Phoebe Leonides M. Dolor
-* Danielle Panopio
-
----
-
-## 📚 Learnings
-
-* Implementation of real-world queue systems
-* Understanding FIFO, LIFO, and priority-based processing
-* Improving problem-solving and system design skills
-
----
-
-## 📌 Future Improvements
-
-* Add graphical user interface (GUI)
-* Connect to a database for persistent storage
-* Online booking integration
-* Mobile-friendly system
-
----
-
-## ⭐ Conclusion
-
-SAILCHECK demonstrates how data structures can be applied in real-world systems like transportation booking. It provides an efficient and organized way to manage passengers and prioritize services.
-
----
-
+4. Serving Process
+Priority queue is checked first
+If not empty → serve priority passenger
+Otherwise → serve regular passenger
+Served data is stored in transaction history stack
+5. Seat System
+Each trip has a structured seat layout
+Seats are assigned dynamically based on availability
+Separate logic for normal and priority allocation
+Seats are freed when bookings are cancelled
+⏱️ Time Complexity Summary
+Operation	Complexity	Reason
+Booking	O(1)	Direct insertion
+Serve Passenger	O(log n)	Priority queue handling
+Search	O(n)	Linear traversal
+Cancel	O(n)	Search + removal
+Sorting	O(n log n)	STL sort per trip
+Seat Assignment	O(n)	Seat scanning
+🔁 Key System Concepts
+Concept	Implementation
+Trip Organization	Map-based grouping
+Priority Handling	Priority queue + comparator
+Regular Flow	FIFO queue
+History Tracking	Stack structure
